@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="title has-text-centered mt-5">{% block title %} Flask URL Shortener {% endblock %}</h1>
+    <div class="columns">
+        <div class="column is-2 mb-3"></div>
+        <div class="column is-8 mb-3">
+            <form method="post" action="{{url_for('index')}}">
+            <p class="control mt-2">
+                <div class="field">
+                    <label class="label">URL</label>
+                    <input type="text" name="url" id="url"
+                        placeholder="Enter looooooooooooong URL" class="input"
+                        value="{{ request.form['url'] }}" autofocus></input>
+                </div>
+            </p>
+            <p class="control mt-2">
+                <div class="field">
+                    <label class="label">Custom Short ID</label>
+                    <input type="text" name="custom_id" id="custom_id"
+                        placeholder="Want to customise? (optional)" class="input"
+                        value="{{ request.form['custom_id'] }}"></input>
+                </div>
+            </p>
+
+            <div class="field level-item has-text-centered mt-2">
+                <div class="control">
+                    <button type="submit" class="button is-primary">Shorten</button>
+                </div>
+            </div>
+            </form>
+
+            {% if short_url %}
+            <hr>
+            <span><a href="{{ short_url }}" target="_blank">{{ short_url }}</a></span>
+            {% endif %}
+        </div>
+        <div class="column is-2 mb-3"></div>
+    </div>
+{% endblock %}
